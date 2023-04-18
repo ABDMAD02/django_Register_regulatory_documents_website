@@ -1,0 +1,52 @@
+{% extends 'diploma/index.html' %}
+{% block content %}
+{% load static%}
+<div class="container p-0">
+    <h1 class="h3 mb-3">Settings</h1>
+    <div class="row">
+    <div class="col-md-5 col-xl-4">
+    <div class="card">
+    <div class="card-header">
+    <h5 class="card-title mb-0">Profile Settings</h5>
+    </div>
+    <div class="list-group list-group-flush" role="tablist">
+    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
+    Account
+    </a>
+    <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
+    Password
+    </a>
+    <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+    Delete account
+    </a>
+    <a class="btn btn-primary " target="__blank" href="{% url 'profile' %}" style="color: black;">Back to Profile</a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-6 col-xl-8">
+    <div class="tab-content">
+    <div class="tab-pane fade show active" id="account" role="tabpanel">
+    <div class="card">
+    </div>
+    <div class="card">
+    <div class="card-header">
+    <div class="card-actions float-right">
+    </div>
+    <h5 class="card-title mb-0">Form fill</h5>
+    </div>
+    <div class="card-body">
+    <form method="POST" action="#" enctype="multipart/form-data">
+        {% csrf_token 0%}
+        {{form.as_p}}
+            <p>Current image:</p>
+            <img class="profile_img" src="{{request.user.employer.profile_img.url}}" class="rounded-circle img-responsive mt-2" width="100" height="100">  
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-3">Save Changes</button>  
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
+    {% endblock %}

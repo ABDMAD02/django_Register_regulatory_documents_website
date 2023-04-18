@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employers
+    </title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 80%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #847cfe;
+        }
+        </style>
+</head>
+<body>
+{% extends 'diploma/index.html' %}
+{% block content %}
+<h1>Staff of UNIVERSITY</h1>
+<table>
+    <tr>
+      <th>Fullname</th>
+      <th>Birthday</th>
+      <th>Email</th>
+      <th>Position</th>
+    </tr>
+    {% for employer in employers %}
+  <tr>
+    <td><a href="employer/{{employer.name}}{{employer.surname}}">{{employer.name}} {{employer.surname}}</a></td>
+    <td>{{employer.birthday}}</td>
+    <td>{{employer.email}}</td>
+    <td>{{employer.position}}</td>
+  </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+</body>
+</html>
