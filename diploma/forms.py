@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django import forms 
 from django.forms import ModelForm
 
+
 from .models import *
 
 class CreateUserForm(UserCreationForm):
@@ -16,7 +17,13 @@ class EmployerForm(ModelForm):
         fields = '__all__'
         exclude = ['user']
 
+choices = Category.objects.all().values_list('name', 'name')
+
 class FilesForm(forms.ModelForm):
     class Meta:
-        model = pdf_files
-        fields = ['topic', 'pdf_file']
+        model = files_doc
+        fields = ['topic', 'file', 'category', 'date_confirm']
+        widgets = {
+            'category' : forms.Select(choices=choices, attrs={'class' : 'form-control, col-xl-4'}),
+        }
+

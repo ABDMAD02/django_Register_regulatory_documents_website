@@ -1,8 +1,12 @@
 from django.contrib import admin
-from .models import example
 from .models import employer
+from .models import Category
+from .models import files_doc
 # Register your models here.
-admin.site.register(example)
 admin.site.register(employer)
+admin.site.register(Category)
+admin.site.register(files_doc)
+
+
 
  

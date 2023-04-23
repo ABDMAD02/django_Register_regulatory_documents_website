@@ -2,13 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class example(models.Model):
-    name = models.CharField(max_length=200)
-    launch_Date = models.DateField()
-    ready_to_launch = models.BooleanField(default=True)
-
-    def __str__(self):
-        return str(self)
 
 class employer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -24,15 +17,29 @@ class employer(models.Model):
     def __str__(self):
         return self.name 
     
-class pdf_files(models.Model):
-    topic = models.CharField(max_length=280)
-    pdf_file = models.FileField(upload_to='document/pdf')
+class files_doc(models.Model):
+    topic = models.CharField(max_length=280, help_text='Тема документа')
+    file = models.FileField(upload_to='document/pdf')
+    time_create = models.DateTimeField(auto_now_add=True)
+    time_update = models.DateTimeField(auto_now=True )
+    category = models.CharField(max_length=280, default='uncategorized', help_text='Категория')
+    date_confirm = models.CharField(max_length=300, help_text='Дата утверждения', null=True)
 
     def delete(self, *args, **kwargs):
-        self.pdf_file.delete()
+        self.file.delete()
         super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.topic 
+
+class Category(models.Model):
+    name = models.CharField(max_length=280)
+
+    def __str__(self):
+        return 'Obj: {}'.format(self.id)
+
+    # def __str__(self):
+    #     return self.name
+
  
 
