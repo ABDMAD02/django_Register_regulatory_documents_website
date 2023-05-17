@@ -1,14 +1,13 @@
-{% extends 'diploma/index.html' %}
+{% extend 'diploma/index.html' %}
+
 {% block content %}
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Положения о коллегиальном органе и ректоре</h1> 
-    </div>
-
+    
+    <h2>{{ cat_s }}</h2> 
     <!-- Content Row -->
-    <div class="row">
+    <div class="container mt-4">     
         <h2>Документы 
             {% if request.user.is_staff %}
             <a class="btn btn-primary btn-sm" href="{% url 'uploadfile' %}">Загрузить документ</a>
@@ -19,23 +18,23 @@
             <thead>
                 <tr>
                   <th>Тема</th>
-                  <th>Время загрузки</th>
-                  <th>Время обновления</th>
+                  <th>Дата загрузки</th>
+                  <th>Дата обновления</th>
                   <th>Архив</th>
                   <th>Download</th>
                 </tr>
               </thead>
+              {% for file in category_files %}
               <tbody>
-                  {% for file in file %}
                 <tr>
                   <td>
                     <a href="{% url 'view_file' %}" target="_blank"> {{file.topic}}</a>
                   </td>
                   <td>
-                    {{file.time_create}}
+                    {{file.time_create.day}}.{{file.time_create.month}}.{{file.time_create.year}}
                   </td>
                   <td>
-                    {{file.time_update}}
+                    {{file.time_update.day}}.{{file.time_update.month}}.{{file.time_update.year}}
                   </td>
                   <td>
                     <a href="{% url 'history'%}" class="btn btn-secondary btn-sm">История изменений</a>

@@ -21,8 +21,8 @@ import codecs
 def welcome(request):
     emp = employer.objects.all()
     file = files_doc.objects.all()
-    # category_files = files_doc.objects.filter(category = cat_s)
-    context = { 'employer' : emp , 'file' : file,}
+    category_list = Category.objects.all()
+    context = { 'employer' : emp , 'file' : file, 'category_list': category_list} 
     return render(request, 'diploma/index.html', context)
 
 @unauthenticated_user
@@ -71,59 +71,31 @@ def reg(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['users','admin'])
 def profile(request):
+    category_list = Category.objects.all()
     if request.user.is_staff:
         admin = request.user
-        context = {'admin' : admin}
+        context = {'admin' : admin, 'category_list': category_list}
         return render(request, 'diploma/profile.html',context)
     else:
         emp = request.user.employer
-        context = {'employer' : emp} 
+        context = {'employer' : emp, 'category_list': category_list} 
         return render(request, 'diploma/profile.html',context)
 
 # @login_required(login_url='login')
 # def upload_files(request):
 #     return render(request, 'diploma/upload_files')
 
-@login_required(login_url='login')
-def politika(request):
-    return render(request, 'diploma/politika.html')
-
-@login_required(login_url='login')
-def organ_i_rek(request):
-    return render(request, 'diploma/o_rektore.html')
-
-@login_required(login_url='login')
-def uchebnyi_proces(request):
-    return render(request, 'diploma/uchebnyi_proces.html')
-
-@login_required(login_url='login')
-def nauchno(request):
-    return render(request, 'diploma/nauchno.html')
-
-@login_required(login_url='login')
-def vospitatel(request):
-    return render(request, 'diploma/vospitatel.html')
-
-@login_required(login_url='login')
-def mezhdunarod(request):
-    return render(request, 'diploma/mezhdunarod.html')
-
-@login_required(login_url='login')
-def personal(request):
-    return render(request, 'diploma/personal.html')
-
-@login_required(login_url='login')
-def admin_hozyai(request):
-    return render(request, 'diploma/admin_hoz.html')
-
 def history(request):
-    return render(request, 'diploma/archive.html')
+    category_list = Category.objects.all()
+    context = {'category_list': category_list}
+    return render(request, 'diploma/archive.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin','users'])
 def acc_settings(request):
+    category_list = Category.objects.all()
     if request.user.is_staff:
-        context = {}
+        context = {'category_list': category_list}
         return render(request, 'diploma/acc_settings.html', context)
     else:
         employer = request.user.employer
@@ -132,12 +104,13 @@ def acc_settings(request):
             form = EmployerForm(request.POST, request.FILES, instance=employer)
             if form.is_valid():
                 form.save()
-        context = {'form': form}
+        context = {'form': form, 'category_list': category_list}
         return render(request, 'diploma/acc_settings.html', context)
 
 @login_required(login_url='login')
 @admin_only
 def file_up(request):
+    category_list = Category.objects.all()
     if request.method == 'POST':
         form = FilesForm(request.POST, request.FILES)
         if form.is_valid():
@@ -145,7 +118,7 @@ def file_up(request):
            return redirect('home')
     else :
         form = FilesForm() 
-    context = {'form':form}
+    context = {'form':form, 'category_list': category_list}
     return render(request, 'diploma/upload_files.html', context)
 
 @login_required(login_url='login')
@@ -159,11 +132,20 @@ def delete_file(request, pk):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['users','admin'])
 def results(request):
-    return render(request, 'diploma/results_page.html') 
+    category_list = Category.objects.all()
+    context = {'category_list': category_list}
+    if request.method == 'POST':
+        searched = request.POST.get('searched')
+        files = files_doc.objects.filter(topic__contains = searched)
+        context = {'category_list': category_list, 'searched': searched, 'files': files}
+        return render(request, 'diploma/results_page.html', context)     
+    else :
+        return render(request, 'diploma/results_page.html', context) 
 
 @login_required(login_url='login')
 @admin_only
 def update_file(request, id):
+    category_list = Category.objects.all()
     file = files_doc.objects.get(id=id)
     form = FilesForm(instance=file)
     if request.method == 'POST':
@@ -173,20 +155,22 @@ def update_file(request, id):
            return redirect('home')
     else :
         form = FilesForm()
-    context = {'form': form}
+    context = {'form': form, 'category_list': category_list}
     return render(request, 'diploma/update_files.html', context)
+
+# @login_required(login_url='login')
+# @allowed_users(allowed_roles=['users','admin'])
+# def read_file(request): 
+#     f = codecs.open('static/images/document/pdf/dz7_1_3.docx', mode='r', encoding='latin-1')
+#     file_content = f.read()
+#     f.close()
+#     context = {'file_content': file_content}
+#     return render(request, 'diploma/view.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['users','admin'])
-def read_file(request): 
-    f = codecs.open('static/images/document/pdf/dz7_1_3.docx', mode='r', encoding='latin-1')
-    file_content = f.read()
-    f.close()
-    context = {'file_content': file_content}
-    return render(request, 'diploma/view.html', context)
-
-
 def categories(request, cat_s):
+    category_list = Category.objects.all()
     category_files = files_doc.objects.filter(category = cat_s)
-    context = {'cat_s': cat_s, 'category_files': category_files}
+    context = {'cat_s': cat_s, 'category_files': category_files, 'category_list': category_list}
     return render(request, 'diploma/categories.html', context)

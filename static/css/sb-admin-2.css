@@ -23,7 +23,7 @@ body {
   line-height: 1.5;
   color: #000000;
   text-align: left;
-  background-color: #fff;
+  background-color: #2821F7;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -116,13 +116,13 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  color: #000000;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #224abe;
+  color: #00e45b;
   text-decoration: underline;
 }
 
@@ -2314,13 +2314,13 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
+  background-color: #0800ff;
   border-color: #4e73df;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
+  background-color: #2256ff;
   border-color: #2653d4;
 }
 
@@ -2425,7 +2425,7 @@ fieldset:disabled a.btn {
 
 .btn-info {
   color: #fff;
-  background-color: #36b9cc;
+  background-color: #2821F7;
   border-color: #36b9cc;
 }
 
@@ -6374,7 +6374,7 @@ a.close.disabled {
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #2653d4 !important;
+  background-color: #0001ff !important;
 }
 
 .bg-secondary {
@@ -11232,6 +11232,6 @@ footer.sticky-footer .copyright {
   font-size: 0.8rem;
 }
 
-body.sidebar-toggled footer.sticky-footer {
+.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }

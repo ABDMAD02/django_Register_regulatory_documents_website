@@ -2,16 +2,74 @@
 
 {% block content %}
 <div class="container-fluid">
-
+    {% if searched %}
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Результат поиска :</h1> 
+        <h1 class="h3 mb-0 text-gray-800">Результаты поиска по документу <b style="color: rgb(0, 34, 255);" >{{searched}}</b>:</h1> 
     </div>
+    
+    <div class="container mt-4">     
+        <h2>Документы 
+            {% if request.user.is_staff %}
+            <a class="btn btn-primary btn-sm" href="{% url 'uploadfile' %}">Загрузить документ</a>
+            {% endif %}
+        </h2>       
 
-    <!-- Content Row -->
-    <div class="row">
-        
+        <table class="table table-striped col-xl-12">
+            <thead>
+                <tr>
+                  <th>Тема</th>
+                  <th>Дата загрузки</th>
+                  <th>Дата обновления</th>
+                  <th>Категория</th>
+                  <th>Архив</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for file in files %}
+                <tr>
+                  <td>
+                    {{file.topic}}
+                  </td>
+                  <td>
+                    {{file.time_create.day}}.{{file.time_create.month}}.{{file.time_create.year}}
+                  </td>
+                  <td>
+                    {{file.time_update}}
+                  </td>
+                  <td>
+                    <a href="{% url 'category' file.category %}" class="btn btn-secondary btn-sm">{{file.category}}</a>
+                  </td>
+                  <td>
+                    <a href="{% url 'history'%}" class="btn btn-secondary btn-sm">История изменений</a>
+                  </td>
+                  <td>
+                    <a href="{{ file.file.url }}" class="btn btn-primary btn-sm" target="_blank"> Скачать Документ </a>
+                  </td>
+                  {% if request.user.is_staff %}
+                  <td>
+                    <form method="POST" action="{% url 'update' file.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-sm">Обновить</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form method="POST" action="{% url 'delete_file' file.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                    </form>
+                  </td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+        </table>
     </div>
-
+    {% else %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"> Введенное поле пустое ! <p>Введите имя документа заново</p></h1> 
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

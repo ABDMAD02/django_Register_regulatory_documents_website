@@ -23,12 +23,12 @@
                   <th>Архив</th>
                   <th>Download</th>
                 </tr>
-              </thead>
+              </thead> 
               {% for file in category_files %}
               <tbody>
                 <tr>
                   <td>
-                    <a href="{% url 'view_file' %}" target="_blank"> {{file.topic}}</a>
+                    {{file.topic}}
                   </td>
                   <td>
                     {{file.time_create.day}}.{{file.time_create.month}}.{{file.time_create.year}}

@@ -36,10 +36,7 @@ class Category(models.Model):
     name = models.CharField(max_length=280)
 
     def __str__(self):
-        return 'Obj: {}'.format(self.id)
-
-    # def __str__(self):
-    #     return self.name
+        return self.name
 
  
 
