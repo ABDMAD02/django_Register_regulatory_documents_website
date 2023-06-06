@@ -2,24 +2,18 @@
 {% block content %}
 {% load static%}
 <div class="container p-0">
-    <h1 class="h3 mb-3">Settings</h1>
+    <h1 class="h3 mb-3">Настройки</h1>
     <div class="row">
     <div class="col-md-5 col-xl-4">
     <div class="card">
     <div class="card-header">
-    <h5 class="card-title mb-0">Profile Settings</h5>
+    <h5 class="card-title mb-0">Настройка профиля</h5>
     </div>
     <div class="list-group list-group-flush" role="tablist">
-    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account" role="tab">
-    Account
+    <a class="list-group-item" data-toggle="list" href="#account" role="tab">
+    Профиль
     </a>
-    <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
-    Password
-    </a>
-    <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-    Delete account
-    </a>
-    <a class="btn btn-primary " target="__blank" href="{% url 'profile' %}" style="color: rgb(255, 255, 255);">Back to Profile</a>
+    <a class="btn btn-primary btn-sm mt-3" target="__blank" href="{% url 'profile' %}" style="color: rgb(255, 255, 255);">Назад в профиль</a>
     </div>
     </div>
     </div>
@@ -32,17 +26,19 @@
     <div class="card-header">
     <div class="card-actions float-right">
     </div>
-    <h5 class="card-title mb-0">Настройка аккаунта</h5>
+    <h5 class="card-title mb-0">Настройка профиля</h5>
     </div>
     <div class="card-body">
     <form method="POST" action="#" enctype="multipart/form-data">
         {% csrf_token 0%}
         {{form.as_p}}
-            <p>Current image:</p>
+            <p>Текущее фото:</p>
             <img class="profile_img" src="{{request.user.employer.profile_img.url}}" class="rounded-circle img-responsive mt-2" width="100" height="100">  
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mt-4 btn-sm ">Save Changes</button>  
-    </form>
+            <div>
+                <button type="submit" class="btn btn-primary mt-2">Сохранить изменений</button> 
+            </div> 
+    </form> 
     </div>
     </div>
     </div>

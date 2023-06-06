@@ -18,12 +18,14 @@ class EmployerForm(ModelForm):
         exclude = ['user']
 
 choices = Category.objects.all().values_list('name', 'name')
+choicesConf = Confirm.objects.all().values_list('name', 'name')
 
 class FilesForm(forms.ModelForm):
     class Meta:
         model = files_doc
-        fields = ['topic', 'file', 'category', 'date_confirm']
+        fields = ['topic', 'file', 'category', 'date_confirm', 'confirm']
         widgets = {
             'category' : forms.Select(choices=choices, attrs={'class' : 'form-control, col-xl-4'}),
+            'confirm' : forms.RadioSelect(choices=choicesConf),
         }
-
+        

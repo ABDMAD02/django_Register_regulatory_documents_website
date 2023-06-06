@@ -8,21 +8,26 @@ from .models import Category
 from django.contrib.auth.models import Group 
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
-from .forms import EmployerForm, FilesForm, choices
-import codecs
+from .forms import EmployerForm, FilesForm
+from django.core.paginator import Paginator
+from django.core.exceptions import ValidationError
+# import codecs
 
 
 # if request.user.is_authenticated:
 #     return redirect('home')
 # else:
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['admin','users'])
+# @allowed_users(allowed_roles=['admin','users'])
 def welcome(request):
-    emp = employer.objects.all()
-    file = files_doc.objects.all()
     category_list = Category.objects.all()
-    context = { 'employer' : emp , 'file' : file, 'category_list': category_list} 
+    emp = employer.objects.all()
+    p = Paginator(files_doc.objects.all(), 10)
+    page = request.GET.get('page')
+    files = p.get_page(page)
+
+    context = { 'employer' : emp ,  'category_list': category_list, 'files' : files }
+    # 'category_list': category_list 
     return render(request, 'diploma/index.html', context)
 
 @unauthenticated_user
@@ -75,27 +80,32 @@ def profile(request):
     if request.user.is_staff:
         admin = request.user
         context = {'admin' : admin, 'category_list': category_list}
+        # 'category_list': category_list
         return render(request, 'diploma/profile.html',context)
     else:
         emp = request.user.employer
         context = {'employer' : emp, 'category_list': category_list} 
+        # 'category_list': category_list
         return render(request, 'diploma/profile.html',context)
 
 # @login_required(login_url='login')
 # def upload_files(request):
 #     return render(request, 'diploma/upload_files')
 
-def history(request):
+def history(request, top):
     category_list = Category.objects.all()
-    context = {'category_list': category_list}
+    history_files = files_doc.objects.filter(topic = top) 
+    context = {'category_list': category_list, 'history_files':history_files}
     return render(request, 'diploma/archive.html', context)
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin','users'])
-def acc_settings(request):
+def acc_settings(request):  
     category_list = Category.objects.all()
     if request.user.is_staff:
         context = {'category_list': category_list}
+        # 'category_list': category_list
         return render(request, 'diploma/acc_settings.html', context)
     else:
         employer = request.user.employer
@@ -119,6 +129,7 @@ def file_up(request):
     else :
         form = FilesForm() 
     context = {'form':form, 'category_list': category_list}
+    # 'category_list': category_list
     return render(request, 'diploma/upload_files.html', context)
 
 @login_required(login_url='login')
@@ -129,15 +140,17 @@ def delete_file(request, pk):
         fileDelete.delete()
     return redirect('home')
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['users','admin'])
+
+# @allowed_users(allowed_roles=['users','admin'])
 def results(request):
     category_list = Category.objects.all()
     context = {'category_list': category_list}
+    
     if request.method == 'POST':
         searched = request.POST.get('searched')
         files = files_doc.objects.filter(topic__contains = searched)
-        context = {'category_list': category_list, 'searched': searched, 'files': files}
+        context = { 'searched': searched, 'files': files, 'category_list': category_list}
+        
         return render(request, 'diploma/results_page.html', context)     
     else :
         return render(request, 'diploma/results_page.html', context) 
@@ -156,6 +169,7 @@ def update_file(request, id):
     else :
         form = FilesForm()
     context = {'form': form, 'category_list': category_list}
+
     return render(request, 'diploma/update_files.html', context)
 
 # @login_required(login_url='login')
@@ -167,8 +181,8 @@ def update_file(request, id):
 #     context = {'file_content': file_content}
 #     return render(request, 'diploma/view.html', context)
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['users','admin'])
+
+# @allowed_users(allowed_roles=['users','admin'])
 def categories(request, cat_s):
     category_list = Category.objects.all()
     category_files = files_doc.objects.filter(category = cat_s)

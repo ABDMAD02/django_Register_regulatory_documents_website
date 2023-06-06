@@ -9,8 +9,7 @@
                       <img src="{{request.user.employer.profile_img.url}}" alt="Admin" class="rounded-circle" width="150">
                       <div class="mt-3">
                         <h4>{{employer.name}} {{employer.surname}}</h4>
-                        <p class="text-secondary mb-1">{{employer.position}}</p>
-                        <p class="text-muted font-size-sm">Data of birthday : {{employer.birthday}}</p>
+                        <p class="text-muted font-size-sm">Дата рождения : {{employer.birthday}}</p>
                       </div>
                     </div>
                   </div>
@@ -21,7 +20,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Full Name</h6>
+                        <h6 class="mb-0">Полное Имя</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{employer.surname}} {{employer.name}}
@@ -39,7 +38,7 @@
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Phone</h6>
+                        <h6 class="mb-0">Телефонный номер</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{employer.phone}}
@@ -49,7 +48,7 @@
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Birthday</h6>
+                        <h6 class="mb-0">Дата рождения</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{employer.birthday}}
@@ -58,8 +57,8 @@
                     <hr>
                     <div class="row">
                       <div class="col-sm-12">
-                        <a class="btn btn-primary " target="__blank" href="{% url 'account_settings' %}" style="color: rgb(255, 255, 255);">Edit</a>
-                        <a class="btn btn-primary " target="__blank" href="{% url 'home' %}" style="color: rgb(255, 255, 255);">Back</a>
+                        <a class="btn btn-primary " target="__blank" href="{% url 'account_settings' %}" style="color: rgb(255, 255, 255);">Изменить</a>
+                        <a class="btn btn-primary " target="__blank" href="{% url 'home' %}" style="color: rgb(255, 255, 255);">Назад</a>
                       </div>
                     </div>
                   </div>

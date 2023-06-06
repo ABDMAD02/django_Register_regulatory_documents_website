@@ -42,7 +42,7 @@
                     <a href="{% url 'category' file.category %}" class="btn btn-secondary btn-sm">{{file.category}}</a>
                   </td>
                   <td>
-                    <a href="{% url 'history'%}" class="btn btn-secondary btn-sm">История изменений</a>
+                    <a href="{% url 'history' file.topic %}" class="btn btn-secondary btn-sm">История изменений</a>
                   </td>
                   <td>
                     <a href="{{ file.file.url }}" class="btn btn-primary btn-sm" target="_blank"> Скачать Документ </a>

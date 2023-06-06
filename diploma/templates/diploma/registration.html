@@ -15,7 +15,7 @@
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			background: #f9f9f9 !important;
+			background: #000000 !important;
 		}
 		.user_card {
 			width: 350px;
@@ -73,7 +73,7 @@
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
-					<h3 id="form-title">REGISTER ACCOUNT</h3>
+					<h3 id="form-title">Регистрация</h3>
 				</div>
 				<div class="d-flex justify-content-center form_container">
 					<form method="POST" action="">
@@ -104,14 +104,17 @@
 						</div>
 
 				   		<div class="d-flex justify-content-center mt-3 login_container">
-				 			<input class="btn login_btn" type="submit" value="Register Account">
+				 			<input class="btn login_btn" type="submit" value="Зарегистрировать аккаунт">
 				   		</div>
+						<div class="d-flex justify-content-center mt-3 login_container">
+							<a href="{% url 'home' %}" >Зайти гостем</a>
+						</div>
 					</form>
 				</div>
                 {{form.errors}}
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
-						Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
+						У вас уже есть учетная запись? <a href="{% url 'login' %}" class="ml-2">Войти</a>
 					</div>
 				</div>
 			</div>

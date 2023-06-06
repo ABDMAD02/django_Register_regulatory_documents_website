@@ -23,7 +23,7 @@ body {
   line-height: 1.5;
   color: #000000;
   text-align: left;
-  background-color: #2821F7;
+  background-color: #009dff;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -287,7 +287,6 @@ progress {
 
 [type="search"] {
   outline-offset: -2px;
-  -webkit-appearance: none;
 }
 
 [type="search"]::-webkit-search-decoration {
@@ -2314,14 +2313,12 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #0800ff;
-  border-color: #4e73df;
+  background-color: #009dff;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2256ff;
-  border-color: #2653d4;
+  background-color: #717384;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -2351,14 +2348,13 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #858796;
-  border-color: #858796;
+  background-color: #717384;
+  
 }
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: #717384;
-  border-color: #6b6d7d;
+  background-color: #009dff;
 }
 
 .btn-secondary:focus, .btn-secondary.focus {
@@ -3509,8 +3505,7 @@ input[type="button"].btn-block {
   display: block;
   min-height: 1.5rem;
   padding-left: 1.5rem;
-  -webkit-print-color-adjust: exact;
-  color-adjust: exact;
+
 }
 
 .custom-control-inline {
@@ -5138,7 +5133,6 @@ a.badge-dark:focus, a.badge-dark.focus {
   overflow: hidden;
   line-height: 0;
   font-size: 0.75rem;
-  v: #eaecf4;
   border-radius: 0.35rem;
 }
 
@@ -9857,7 +9851,7 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #2821F7;
+  background-color: #009dff;
   background-size: cover;
 }
 

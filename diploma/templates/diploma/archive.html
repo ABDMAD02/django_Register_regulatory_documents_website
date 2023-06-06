@@ -6,6 +6,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">История изменений</h1> 
+        <h2>{{ top }}</h2>
     </div>
 
     <!-- Content Row -->
@@ -18,20 +19,31 @@
                   <th>Время загрузки</th>
                   <th>Время обновления</th>
                   <th>Дата утверждения</th>
+                  <th>Статус</th>
                   <th>Download</th>
                 </tr>
               </thead>
               <tbody>
-                  {% for file in file %}
+                  {% for file in history_files %}
                 <tr>
                   <td>
-                    <a href="{% url 'view_file' %}" target="_blank"> {{file.topic}}</a>
+                    {{file.topic}}
                   </td>
-                  <td>
+                  <td> 
                     {{file.time_create}}
                   </td>
                   <td>
                     {{file.time_update}}
+                  </td>
+                  <td>
+                    {{ file.date_confirm }}
+                  </td>
+                  <td>
+                    {% if file.confirm == 'Действующий документ' %}
+                    <p style="color: limegreen;"><b>{{ file.confirm }}</b></p>
+                    {% else %}
+                    <p style="color: red;"><b>{{ file.confirm }}</b></p>
+                    {% endif %}
                   </td>
                   <td>
                     <a href="{{ file.file.url }}" class="btn btn-primary btn-sm" target="_blank"> Скачать Документ </a>

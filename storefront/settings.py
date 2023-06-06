@@ -43,9 +43,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     
     'django.middleware.security.SecurityMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,13 +81,8 @@ WSGI_APPLICATION = 'storefront.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'diploma',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST' : 'localhost',
-        'PORT' : '3306', 
-        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -127,13 +123,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
     BASE_DIR/'static'
 ]
 
-MEDIA_ROOT = BASE_DIR/ 'static/images'
+MEDIA_ROOT = BASE_DIR/ 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -143,3 +141,8 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = '587'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'madi20.08'

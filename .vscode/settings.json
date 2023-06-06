@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b3a5fb2d-7452-44e4-9c4f-b0b8fccbc9d7/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/astanait-regulatory-docs",
+    "appService.deploySubpath": "."
+}
