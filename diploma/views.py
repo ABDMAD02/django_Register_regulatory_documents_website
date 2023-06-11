@@ -22,7 +22,7 @@ from django.core.exceptions import ValidationError
 def welcome(request):
     category_list = Category.objects.all()
     emp = employer.objects.all()
-    p = Paginator(files_doc.objects.all(), 10)
+    p = Paginator(files_doc.objects.all(), 3)
     page = request.GET.get('page')
     files = p.get_page(page)
 

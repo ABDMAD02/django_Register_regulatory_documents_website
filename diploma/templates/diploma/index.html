@@ -180,7 +180,7 @@
                       <td>
                         <form method="POST" action="{% url 'delete_file' file.pk %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Удалить</button>
                         </form>
                       </td>
                       {% endif %}
@@ -206,9 +206,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                      <th>Fullname</th>
-                      <th>Birthday</th>
-                      <th>Email</th>
+                      <th>Полное Имя</th>
+                      <th>День рождения</th>
+                      <th>Электронная почта</th>
                     </tr>
                   </thead>
                   <tbody>

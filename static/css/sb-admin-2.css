@@ -185,6 +185,11 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  color: #000000;
+}
+
+label:hover {
+  color:#00e45b
 }
 
 button {

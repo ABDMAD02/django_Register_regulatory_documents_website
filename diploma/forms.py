@@ -26,6 +26,13 @@ class FilesForm(forms.ModelForm):
         fields = ['topic', 'file', 'category', 'date_confirm', 'confirm']
         widgets = {
             'category' : forms.Select(choices=choices, attrs={'class' : 'form-control, col-xl-4'}),
-            'confirm' : forms.RadioSelect(choices=choicesConf),
+            'confirm' : forms.RadioSelect(choices=choicesConf, attrs={'class' : 'd-inline-flex m-2'}),
+        }
+        labels = {
+            'topic':'',
+            'file':'',
+            'category':'',
+            'date_confirm':'',
+            'confirm':'',
         }
         

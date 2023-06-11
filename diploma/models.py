@@ -18,13 +18,13 @@ class employer(models.Model):
         return self.name 
     
 class files_doc(models.Model):
-    topic = models.CharField(max_length=280, help_text='Тема документа')
+    topic = models.CharField(max_length=280, help_text='Тема документа', blank=True)
     file = models.FileField(upload_to='document/', validators=[validate_file_size])
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True )
     category = models.CharField(max_length=280, default='uncategorized', help_text='Категория')
-    date_confirm = models.CharField(max_length=300, help_text='Дата утверждения', null=True)
-    confirm = models.CharField(max_length=280, default='Действующий документ', blank=True)
+    date_confirm = models.CharField(max_length=300, help_text='Дата утверждения', null=True, blank=True)
+    confirm = models.CharField(max_length=280)
 
     def delete(self, *args, **kwargs):
         self.file.delete()
@@ -40,7 +40,7 @@ class Category(models.Model):
         return self.name
     
 class Confirm(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200,)
     
     def __str__(self):
         return self.name
