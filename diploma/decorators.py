@@ -23,7 +23,7 @@ def allowed_users(allowed_roles=[]):
     return decorator
 
 def admin_only(view_func):
-    def wrapper_function(request, *args, **kwargs):
+    def wrapper_func(request, *args, **kwargs):
 
         group = None
 
@@ -36,4 +36,4 @@ def admin_only(view_func):
         if group == 'admin':
             return view_func(request,  *args, **kwargs)
         
-    return wrapper_function
+    return wrapper_func
